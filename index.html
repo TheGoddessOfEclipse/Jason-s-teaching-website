@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JASON'S TEACHING LAB // 英語教學與數位資源庫</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =========================================
+       背景環境光暈
+       ========================================= -->
+  <div class="ambient-glow glow-pink"></div>
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-green"></div>
+
+  <!-- =========================================
+       頂部固定導覽列
+       ========================================= -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#top" class="brand-logo">
+        <span class="neon-dot"></span> Jace's <span>// Teaching Lab</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="開啟選單">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">自我介紹</a>
+        <a href="#journey">教學歷程</a>
+        <a href="#materials">教材與表單</a>
+        <a href="#webapps">教學網頁</a>
+        <a href="#contact" class="nav-cta">聯絡交流</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================
+       主內容區
+       ========================================= -->
+  <main id="top">
+
+    <!-- HERO 首頁主視覺 -->
+    <section class="hero">
+      <div class="hero-bg-slot img-slot" data-label="images/hero-bg.jpg (建議 1920x1080)">
+        <img src="images/hero-bg.jpg" alt="Hero Background" />
+      </div>
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <p class="hero-kicker">I dreamed, so they can dream further.</p>
+        <h1 class="hero-title">
+          <span class="neon-outline">Jace's</span><br />
+          <span class="neon-solid">Teaching Lab</span>
+        </h1>
+        <p class="hero-subtitle">
+          我找到了我存在的意義，我也想去幫他們找到他們自己生命中的自己。
+        </p>
+      </div>
+    </section>
+
+    <!-- 下方四大區塊共用直式大背景容器 -->
+    <div class="lower-sections-wrapper">
+      <div class="lower-bg-slot img-slot" data-label="images/bg-main.jpg (下方四大區塊共用直式背景)">
+        <img src="images/bg-main.jpg" alt="Cyberpunk City Background" />
+      </div>
+      <div class="lower-bg-overlay"></div>
+
+      <!-- 01 // 自我介紹 (ABOUT) -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">01 // PROFILE</span>
+            <h2 class="section-title">自我介紹 <span class="title-en">ABOUT ME</span></h2>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-photo-frame">
+              <div class="img-slot ratio-portrait" data-label="images/avatar.jpg (建議 4:5 個人形象照)">
+                <img src="images/avatar.jpg" alt="Jason 老師頭像" />
+              </div>
+            </div>
+
+            <div class="about-info">
+              <h3 class="about-name">Jason <span class="role-badge">國中英語教師</span></h3>
+              <p class="about-desc">
+                一個大概從國中就開始有志想當英文老師的水瓶座怪胎。單純讓別人的生命能因為我而變得更好是一件很屌的事情。現在當上了英文老師了，依然覺得很屌。也樂於分享我在教學現場的親身經歷。雖然分享的東西不一定很厲害，但，我就是想分享。之類的。
+              </p>
+
+              <div class="skill-tags">
+                <span># 教學網頁設計</span>
+                <span># 外師協同教學</span>
+                <span># 實用英語活動</span>
+                <span># 創意跨領域課程</span>
+              </div>
+
+              <div class="stats-row">
+                <div class="stat-box">
+                  <span class="stat-num">4</span>
+                  <span class="stat-label">教學歷程分享</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">20+</span>
+                  <span class="stat-label">自製教材與表單</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">10+</span>
+                  <span class="stat-label">互動式教學網頁</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 // 教學歷程分享 (JOURNEY) -->
+      <section id="journey" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">02 // ARCHIVE</span>
+            <h2 class="section-title">教學歷程分享 <span class="title-en">TEACHING JOURNEY</span></h2>
+          </div>
+          <!-- 由 script.js 動態渲染 -->
+          <div class="card-grid grid-3" id="journeyGrid"></div>
+        </div>
+      </section>
+
+      <!-- 03 // 自製教材與表單分享 (MATERIALS) -->
+      <section id="materials" class="section">
+        <div class="container">
+          <div class="section-header header-with-filter">
+            <div>
+              <span class="section-tag">03 // CATALOG</span>
+              <h2 class="section-title">自製教材表單 <span class="title-en">MATERIALS &amp; FORMS</span></h2>
+            </div>
+
+            <div class="filter-bar" id="materialFilters">
+              <button class="filter-btn active" data-filter="all">ALL 全部</button>
+              <button class="filter-btn" data-filter="worksheet">學習單</button>
+              <button class="filter-btn" data-filter="form">Google 表單</button>
+              <button class="filter-btn" data-filter="handout">文法/單字講義</button>
+            </div>
+          </div>
+          <!-- 由 script.js 動態渲染 -->
+          <div class="bento-grid" id="materialsGrid"></div>
+        </div>
+      </section>
+
+      <!-- 04 // 自製教學網頁分享 (WEB APPS) -->
+      <section id="webapps" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">04 // INTERACTIVE APPS</span>
+            <h2 class="section-title">自製教學網頁 <span class="title-en">TEACHING WEB APPS</span></h2>
+          </div>
+          <!-- 由 script.js 動態渲染 -->
+          <div class="card-grid grid-2" id="webappsGrid"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================
+       頁尾
+       ========================================= -->
+  <footer id="contact" class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand-logo"><span class="neon-dot"></span> Jace's <span>// Teaching Lab</span></div>
+        <p>持續打造有趣、實用、帶點賽博靈魂的英語教學資源。</p>
+      </div>
+      <div class="footer-links">
+        <a href="#" id="copyEmailBtn">EMAIL 聯絡</a>
+        <a href="#top">BACK TO TOP ↑</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="copyrightTrigger">© 2026 Jace's Teaching Website. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- =========================================
+       全域提示條 & 編輯模式控制列
+       ========================================= -->
+  <div id="toast" class="cyber-toast">內頁架構建置中，敬請期待！</div>
+
+  <div id="adminBar" class="admin-bar">
+    <div class="admin-bar-inner">
+      <span class="admin-status"><span class="live-dot"></span> EDIT MODE ACTIVE // 編輯模式已開啟</span>
+      <div class="admin-bar-actions">
+        <button type="button" id="editThemeBtn" class="admin-btn-sm">🎨 色彩編輯</button>
+        <button type="button" id="editHeroBtn" class="admin-btn-sm">✎ 編輯主視覺</button>
+        <button type="button" id="editAboutBtn" class="admin-btn-sm">✎ 編輯自我介紹</button>
+        <button type="button" id="exitEditBtn" class="admin-btn-exit">退出編輯模式</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       彈窗群組 (Modals)
+       ========================================= -->
+
+  <!-- 1. 密碼解鎖彈窗 -->
+  <div id="passwordModal" class="cyber-modal">
+    <div class="cyber-modal-box modal-sm">
+      <h3 class="modal-title">SYSTEM ACCESS // 驗證身分</h3>
+      <p class="modal-subtitle">請輸入管理員密碼以切換至編輯模式</p>
+      <form id="passwordForm">
+        <input type="password" id="adminPasswordInput" class="cyber-input" placeholder="輸入密碼..." autocomplete="off" required />
+        <p id="passwordError" class="form-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" data-close-modal>取消</button>
+          <button type="submit" class="btn-modal-save">解鎖進入</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. 通用內容編輯與圖片上傳彈窗 -->
+  <div id="editorModal" class="cyber-modal">
+    <div class="cyber-modal-box modal-lg">
+      <div class="modal-header">
+        <h3 id="editorModalTitle" class="modal-title">編輯內容</h3>
+        <button type="button" class="modal-close-x" data-close-modal>✕</button>
+      </div>
+      <form id="editorForm" class="editor-form">
+        <div id="editorFields" class="editor-fields"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" data-close-modal>取消</button>
+          <button type="submit" id="editorSaveBtn" class="btn-modal-save">儲存並同步至 Firebase</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. 教學歷程詳情頁彈窗 -->
+  <div id="journeyDetailModal" class="cyber-modal">
+    <div class="cyber-modal-box modal-xl journey-detail-box">
+      <div class="modal-header">
+        <div>
+          <span id="jdMeta" class="card-meta"></span>
+          <h2 id="jdTitle" class="jd-title"></h2>
+        </div>
+        <div class="jd-header-actions">
+          <button type="button" id="jdQuickEditBtn" class="admin-btn-sm" style="display:none;">✎ 編輯此歷程</button>
+          <button type="button" class="modal-close-x" data-close-modal>✕</button>
+        </div>
+      </div>
+
+      <div class="jd-body">
+        <div class="jd-meta-bar">
+          <span id="jdBadge" class="card-badge jd-badge-inline"></span>
+          <span class="jd-duration-pill">⏱ 課程總時長：<strong id="jdTotalDuration">0 分鐘</strong></span>
+        </div>
+
+        <div id="jdPhotoWrap" class="jd-photo-wrap">
+          <img id="jdPhoto" src="" alt="教學歷程相片" />
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-info-box jd-concept-box">
+            <h3 class="jd-section-title">01 // 設計理念 CONCEPT</h3>
+            <p id="jdConcept"></p>
+          </div>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-info-box jd-concept-box">
+            <h3 class="jd-section-title">02 // 教學流程 TIMELINE</h3>
+            <div id="jdTimeline" class="flow-timeline"></div>
+          </div>
+        </div>
+
+        <div class="jd-grid-2">
+          <div class="jd-info-box jd-reflection-box">
+            <h3 class="jd-section-title">03 // 教學心得 REFLECTION</h3>
+            <p id="jdReflection"></p>
+          </div>
+          <div class="jd-info-box jd-notes-box">
+            <h3 class="jd-section-title">04 // 注意事項 CAUTION</h3>
+            <p id="jdNotes"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 自製教材詳情與預覽彈窗 -->
+  <div id="materialDetailModal" class="cyber-modal">
+    <div class="cyber-modal-box modal-xl journey-detail-box material-detail-box">
+      <div class="modal-header">
+        <div>
+          <span id="mdCat" class="card-meta"></span>
+          <h2 id="mdTitle" class="jd-title"></h2>
+        </div>
+        <div class="jd-header-actions">
+          <button type="button" id="mdQuickEditBtn" class="admin-btn-sm" style="display:none;">✎ 編輯此教材</button>
+          <button type="button" class="modal-close-x" data-close-modal>✕</button>
+        </div>
+      </div>
+
+      <div class="jd-body">
+        <div class="jd-meta-bar">
+          <span id="mdBadge" class="card-badge jd-badge-inline"></span>
+          <span id="mdFileType" class="md-type-pill">FILE</span>
+        </div>
+        <div id="mdTags" class="md-tags-row"></div>
+
+        <div class="jd-section">
+          <div class="jd-info-box jd-concept-box">
+            <h3 class="jd-section-title">01 // 資源簡述 OVERVIEW</h3>
+            <p id="mdDesc"></p>
+          </div>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-info-box jd-concept-box">
+            <div class="md-preview-header">
+              <h3 class="jd-section-title" style="margin-bottom:0;">02 // 文件預覽 PREVIEW</h3>
+              <div class="md-action-btns">
+                <a id="mdDownloadBtn" href="#" download class="md-act-btn md-btn-download">⬇ 下載檔案</a>
+                <button type="button" id="mdPrintBtn" class="md-act-btn md-btn-print">🖨 列印文件</button>
+                <a id="mdOpenNewBtn" href="#" target="_blank" rel="noopener noreferrer" class="md-act-btn md-btn-open">↗ 新分頁開啟</a>
+              </div>
+            </div>
+            <div id="mdPreviewArea" class="md-preview-area"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
