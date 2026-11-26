@@ -494,7 +494,22 @@ function openJourneyDetail(idx) {
   document.getElementById("jdConcept").textContent = item.concept || item.text || "尚未填寫設計理念。";
   document.getElementById("jdReflection").textContent = item.reflection || "尚未填寫教學心得。";
   document.getElementById("jdNotes").textContent = item.notes || "無特別注意事項。";
-
+  const gallerySection = document.getElementById("jdGallerySection");
+  const galleryEl = document.getElementById("jdGallery");
+  const gallery = (item.gallery || []).filter(Boolean);
+  if (gallery.length) {
+    galleryEl.innerHTML = gallery
+      .map((src, i) => `
+        <a href="${src}" target="_blank" rel="noopener noreferrer" class="jd-gallery-item">
+          <img src="${src}" alt="${item.title} 活動花絮 ${i + 1}" />
+        </a>
+      `)
+      .join("");
+    gallerySection.style.display = "block";
+  } else {
+    galleryEl.innerHTML = "";
+    gallerySection.style.display = "none";
+  }
   const quickEditBtn = document.getElementById("jdQuickEditBtn");
   quickEditBtn.style.display = isEditMode ? "inline-block" : "none";
 
@@ -788,7 +803,7 @@ function createFlowStepRow(step = { name: "", duration: 15, desc: "" }) {
   return row;
 }
 
-function createDynamicImgRow(value = "") {
+function createDynamicImgRow(value = "", inputClass = "webapp-img-input") {
   const uid = `dynImg_${++dynamicImgCounter}`;
   const wrapper = document.createElement("div");
   wrapper.className = "dynamic-img-row";
@@ -797,10 +812,10 @@ function createDynamicImgRow(value = "") {
       <img src="${value}" class="img-upload-preview" id="preview_${uid}" onerror="this.style.opacity=0.2" />
       <div class="img-upload-controls">
         <label class="upload-file-label">
-          ↑ 選擇截圖上傳
+          ↑ 選擇圖片上傳（自動壓縮）
           <input type="file" accept="image/*" hidden data-upload-target="${uid}" />
         </label>
-        <input type="text" class="cyber-input webapp-img-input" id="input_${uid}" value="${value}" placeholder="圖片網址或 images/xxx.jpg" />
+        <input type="text" class="cyber-input ${inputClass}" id="input_${uid}" value="${value}" placeholder="圖片網址或 images/xxx.jpg" />
         <span class="upload-status" id="status_${uid}"></span>
       </div>
     </div>
@@ -897,6 +912,11 @@ function openEditor(type, index) {
 
       <div class="field-group"><label>教學心得</label><textarea class="cyber-textarea" name="reflection" placeholder="寫下這次課程的觀察與心得...">${item.reflection || ''}</textarea></div>
       <div class="field-group"><label>注意事項</label><textarea class="cyber-textarea" name="notes" placeholder="寫下備課或執行時需要注意的細節...">${item.notes || ''}</textarea></div>
+      <div class="field-group">
+        <label>活動花絮照片（可自由增減張數）</label>
+        <div id="journeyGalleryList"></div>
+        <button type="button" id="addJourneyImgBtn" class="btn-row-add">+ 新增活動照片</button>
+      </div>
     `;
 
     bindUploadInputs(editorFields);
@@ -910,6 +930,12 @@ function openEditor(type, index) {
       flowListEl.appendChild(createFlowStepRow({ name: "", duration: 15, desc: "" }));
       updateFlowTotalPreview();
     });
+    const galleryListEl = document.getElementById("journeyGalleryList");
+    (item.gallery || []).forEach((src) => galleryListEl.appendChild(createDynamicImgRow(src, "journey-gallery-input")));
+    document.getElementById("addJourneyImgBtn").addEventListener("click", () => {
+      galleryListEl.appendChild(createDynamicImgRow("", "journey-gallery-input"));
+    });
+
   } else if (type === "material") {
     const isNew = index === -1;
     editorTitle.textContent = isNew ? "新增自製教材 / 表單" : "編輯自製教材 / 表單";
@@ -1084,6 +1110,9 @@ editorForm.addEventListener("submit", async (e) => {
       }))
       .filter((s) => s.name);
 
+    const galleryInputs = document.querySelectorAll("#journeyGalleryList .journey-gallery-input");
+    const gallery = Array.from(galleryInputs).map((el) => el.value.trim()).filter(Boolean);
+
     const newItem = {
       id: index === -1 ? "j_" + Date.now() : siteData.journeys[index].id,
       title: fd.get("title"),
@@ -1095,8 +1124,10 @@ editorForm.addEventListener("submit", async (e) => {
       concept: fd.get("concept"),
       flow,
       reflection: fd.get("reflection"),
-      notes: fd.get("notes")
+      notes: fd.get("notes"),
+      gallery
     };
+
     if (index === -1) siteData.journeys.push(newItem);
     else siteData.journeys[index] = newItem;
   } else if (type === "material") {

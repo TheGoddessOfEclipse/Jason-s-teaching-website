@@ -1944,3 +1944,35 @@ body.edit-mode .admin-btn-cat {
   color: #070510;
   transform: rotate(90deg);
 }
+
+/* =========================================
+   23. 教學歷程活動花絮相簿 (Journey Gallery)
+   ========================================= */
+.jd-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.jd-gallery-item {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(7, 5, 16, 0.6);
+  aspect-ratio: 4 / 3;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.jd-gallery-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--jd-color, var(--neon-cyan));
+  box-shadow: 0 0 18px var(--jd-glow, rgba(0, 240, 255, 0.35));
+}
+
+.jd-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
