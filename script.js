@@ -1045,26 +1045,47 @@ function openEditor(type, index) {
 }
 
 function bindUploadInputs(container) {
+  const processImageFile = async (file, target) => {
+    const statusEl = document.getElementById(`status_${target}`);
+    statusEl.textContent = "壓縮處理中...";
+    try {
+      const base64 = await compressImage(file);
+      const kb = Math.round((base64.length * 3) / 4 / 1024);
+      document.getElementById(`input_${target}`).value = base64;
+      const preview = document.getElementById(`preview_${target}`);
+      preview.src = base64;
+      preview.style.opacity = 1;
+      statusEl.textContent = `✓ 已壓縮完成 (${kb} KB)`;
+    } catch {
+      statusEl.textContent = "⚠ 圖片讀取失敗";
+    }
+  };
+
   container.querySelectorAll("[data-upload-target]").forEach((fileInput) => {
+    const target = fileInput.dataset.uploadTarget;
+
+    // 1. 原本的「選擇圖片上傳」
     fileInput.addEventListener("change", async (e) => {
       const file = e.target.files[0];
-      if (!file) return;
-      const target = fileInput.dataset.uploadTarget;
-      const statusEl = document.getElementById(`status_${target}`);
-      statusEl.textContent = "壓縮處理中...";
-
-      try {
-        const base64 = await compressImage(file);
-        const kb = Math.round((base64.length * 3) / 4 / 1024);
-        document.getElementById(`input_${target}`).value = base64;
-        const preview = document.getElementById(`preview_${target}`);
-        preview.src = base64;
-        preview.style.opacity = 1;
-        statusEl.textContent = `✓ 已壓縮完成 (${kb} KB)`;
-      } catch {
-        statusEl.textContent = "⚠ 圖片讀取失敗";
-      }
+      if (file) await processImageFile(file, target);
     });
+
+    // 2. 新增：在輸入框按 Ctrl+V 直接貼上剪貼簿截圖
+    const textInput = document.getElementById(`input_${target}`);
+    if (textInput) {
+      textInput.placeholder = "點此按 Ctrl+V 直接貼上截圖，或貼上圖片網址";
+      textInput.addEventListener("paste", async (e) => {
+        const items = e.clipboardData?.items || [];
+        for (const item of items) {
+          if (item.type.startsWith("image/")) {
+            e.preventDefault();
+            const file = item.getAsFile();
+            if (file) await processImageFile(file, target);
+            return;
+          }
+        }
+      });
+    }
   });
 }
 
